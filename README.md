@@ -8,3 +8,5 @@ This program finds words that are 3-8 letters long using a depth first search me
 Points are tallied up based up based on the length of the word and all, which is then printed along with all the words found from a dictionary text file.
 
 A spellchecker program is included as well to test the hashmap dictionary functionality
+
+Create the necessary files with 'make' and run the program with ' ./onePlayerBoggle dictionary.txt int' where int is the seed

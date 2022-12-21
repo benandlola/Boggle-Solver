@@ -9,4 +9,4 @@ Points are tallied up based up based on the length of the word and all, which is
 
 A spellchecker program is included as well to test the hashmap dictionary functionality
 
-Create the necessary files with 'make' and run the program with ' ./onePlayerBoggle dictionary.txt int' where int is the seed
+Create the necessary files with `make` and run the program with `./onePlayerBoggle dictionary.txt int` where int is the seed

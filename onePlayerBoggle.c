@@ -11,6 +11,7 @@ int main(int argc, char * argv[]){
   boggle_t * bg;
   int seed = 0;
   int points = 0;
+  bst_node_t * bst;
   llist_t * ll;
   
   if(argc < 2){
@@ -29,15 +30,14 @@ int main(int argc, char * argv[]){
   bg_print(bg);
 
   //find all the words
-  ll = bg_all_words(bg);
-
-  //count up the points
-  points = bg_count_points(bg,ll);
+  bst = bg_all_words(bg);
+  ll = bg_all_words2(bg);
+  //count up the points.
+  points = bg_count_points(bg, ll);
 
   //print out the words
-  for(ll_node_t * n = ll->head; n; n=n->next){
-    printf("%s\n",n->val);
-  }
+  bst_print(bst);
+  bst_delete(bst); //free the tree
   ll_delete(ll); //free the list
   
   printf("\n");

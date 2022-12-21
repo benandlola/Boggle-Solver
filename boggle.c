@@ -5,6 +5,7 @@
 
 #include "llist.h"
 #include "hashmap.h"
+#include "bst.h"
 #include "boggle.h"
 
 //constant values on all the dice in global
@@ -119,8 +120,37 @@ void _bg_all_words(boggle_t * bg, //boggle instance
 		   int last_visited[BOGGLE_DIMENSION][BOGGLE_DIMENSION] //what has been previously visited; don't want to double back
 		   );
 
-//entry function for finding all the words
-llist_t * bg_all_words(boggle_t *bg){
+bst_node_t * bg_all_words(boggle_t *bg) { //make it return ordered tree
+  int visited[BOGGLE_DIMENSION][BOGGLE_DIMENSION] = {0};
+  char cur_word[9] = {0}; 
+  hashmap_t * hm = hm_init();
+  for(int i=0;i<BOGGLE_DIMENSION;i++){
+    for(int j=0;j<BOGGLE_DIMENSION;j++){
+      _bg_all_words(bg, hm, i, j, cur_word, visited);
+    }
+  }
+
+  bst_node_t *all_words = malloc(sizeof(bst_node_t));
+  all_words->left = NULL;
+  all_words->right = NULL;
+  all_words->val = NULL;
+
+  for (int i = 0; i < hm->num_buckets; i++) {
+    ll_node_t *cur = hm->buckets[i]->head;
+    while (cur != NULL) {
+      if (hm_check(bg->dict, cur->val)) { 
+        bst_insert(all_words, cur->val); 
+      }
+      cur = cur->next;
+    }
+  }
+
+  hm_delete(hm); 
+  return all_words;
+}
+
+//entry function for finding all the words; kept for easier point tally
+llist_t * bg_all_words_2(boggle_t *bg){
 
   //currently visited nowhere (all 0's), and the current word is the empty string
   int visited[BOGGLE_DIMENSION][BOGGLE_DIMENSION] = {0};

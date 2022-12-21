@@ -3,6 +3,7 @@
 
 #include "llist.h"
 #include "hashmap.h"
+#include "bst.h"
 
 //header information about the board
 #define BOGGLE_NUM_DICE 25
@@ -27,6 +28,7 @@ void bg_print(boggle_t * bg);
 int bg_count_points(boggle_t * bg, llist_t * words);
 
 //find and print all the words, returns a llist with newly allocated strs
-llist_t * bg_all_words(boggle_t *bg);
+bst_node_t * bg_all_words(boggle_t *bg); //change to be a binary search tree
+llist_t * bg_all_words_2(boggle_t *bg); //keep for easy score counting
 
 #endif
